@@ -117,7 +117,7 @@ def borrowBooks(request,pk):
     theBook = get_object_or_404(Book, id=pk)
     
     if request.method == 'BORROW':
-        if theBook.status == 'in Use':
+        if theBook.status == theBook.STATUS_CHOICES[2][0]:
             return Response("'" + theBook.title + "' is already borrowed, please choose another one.")
         else:
             theBook.status = theBook.STATUS_CHOICES[1][0]
