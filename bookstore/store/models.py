@@ -36,11 +36,13 @@ class Borrower(models.Model):
     class Meta:
         verbose_name_plural = 'Borrowers'
         
-    username = models.ForeignKey(User, related_name='borrower_username', on_delete=models.SET_NULL, null=True)
+    username= models.ForeignKey(User, related_name='borrower_username', on_delete=models.SET_NULL, null=True)
     mail = models.CharField(max_length=225)
-    date = models.DateTimeField(auto_now_add=True, null = True)
-    returndate = models.DateTimeField(default = None, null = True)
+    date = models.CharField(default = None, max_length=30, null = True)
+    returndate = models.CharField(default = None, max_length=30, null = True)
     book = models.ForeignKey(Book, related_name='borrower_book', on_delete=models.SET_NULL, null=True)
+    book_title = models.CharField(max_length=225, default=None, null = True)
+    book_author = models.CharField(max_length=225, default=None, null = True)
 
     def __str__(self):
         return str(self.book)

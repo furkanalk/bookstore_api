@@ -1,18 +1,17 @@
+from .models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseNotAllowed
-from django.contrib.auth import authenticate
 #
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.decorators import api_view
 from rest_framework.authtoken.models import Token
-
+from django.contrib.auth import authenticate
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 #
 from store.serializer import UserSerializer
-from .models import User
 
 # Register
 @api_view(['POST'])

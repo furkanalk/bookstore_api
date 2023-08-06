@@ -24,4 +24,4 @@ class BookSerializer(serializers.ModelSerializer):
 class BorrowerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Borrower
-        fields = ['username', 'book', 'date', 'returndate']
+        fields = ['book_title', 'book_author', 'date', 'returndate']

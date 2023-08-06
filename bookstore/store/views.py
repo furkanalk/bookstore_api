@@ -4,12 +4,12 @@ from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
-from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 #
 from .serializer import UserSerializer, BookSerializer, BorrowerSerializer
 from registration.models import User
 from .models import Book, Borrower
-import datetime
+from django.utils import timezone, dateformat
         
 # Show a list of all Users
 @api_view(['GET','POST'])
@@ -117,22 +117,27 @@ def borrowBooks(request,pk):
     theBook = get_object_or_404(Book, id=pk)
     
     if request.method == 'BORROW':
-        if theBook.status == theBook.STATUS_CHOICES[2][0]:
+        if theBook.status == theBook.STATUS_CHOICES[1][0]:
             return Response("'" + theBook.title + "' is already borrowed, please choose another one.")
         else:
             theBook.status = theBook.STATUS_CHOICES[1][0]
             theBook.save()
-            Borrower.objects.create(username_id=request.user.id, mail= request.user.email, date = datetime.datetime.now(), book_id = pk )
+            user = User.objects.get(id = request.user.id)
+            book_ = Book.objects.get(id = pk)
+            formatted_date = dateformat.format(timezone.now(), 'Y-m-d H:i:s')
+            Borrower.objects.create(username = user, mail= request.user.email, 
+            date = formatted_date, book = book_, book_title = theBook.title, book_author = theBook.author )
             return Response("You have successfully borrowed '" + theBook.title + "'.")
         
     elif request.method == 'RETURN':
         if theBook.status == theBook.STATUS_CHOICES[1][0]:
             theBook.status = theBook.STATUS_CHOICES[2][0]
             theBook.save()
-             
+            
+            formatted_date = dateformat.format(timezone.now(), 'Y-m-d H:i:s')
             data = Borrower.objects.filter(book_id = pk).latest('id')
             if data is not None:
-                data.returndate = datetime.datetime.now()
+                data.returndate = formatted_date
                 data.save(update_fields=['returndate'])
             
             return Response("You have successfully returned '" + theBook.title + "'.")
