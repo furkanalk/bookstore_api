@@ -1,4 +1,4 @@
-# bookstore_api
+# Bookstore API
 
 **********************************************
 # Authentication: ``` Token ```
