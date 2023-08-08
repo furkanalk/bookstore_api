@@ -1,10 +1,10 @@
 # bookstore_api
 
 **********************************************
-# Authentication:
+# Authentication: ``` Token ```
 Register: ``` POST ```
 ```
-127.0.0.1:8000/api/auth/register/
+localhost:8000/api/auth/register/
 ```
 ```
 {
@@ -15,7 +15,7 @@ Register: ``` POST ```
 ```
 Login: ``` POST ```
 ```
-127.0.0.1:8000/api/auth/login/
+localhost:8000/api/auth/login/
 ```
 ```
 {
@@ -25,48 +25,48 @@ Login: ``` POST ```
 ```
 Logout: ``` POST ```
 ```
-127.0.0.1:8000/api/auth/logout/
+localhost:8000/api/auth/logout/
 ```
 **********************************************
 # Available commands for all Users:
 Shows all the books: ``` GET ```
 ```
-127.0.0.1:8000/api/books/
+localhost:8000/api/books/
 ```
 **********************************************
 # Available commands for Authenticated Users:
 
 To borrow a book (pk is the book id): ``` BORROW ```
 ```
-127.0.0.1:8000/api/books/borrow/<pk>
+localhost:8000/api/books/borrow/<pk>
 ```
 To return a borrowed book: ``` RETURN ```
 > (the book must be borrowed first)
 ```
-127.0.0.1:8000/api/books/borrow/<pk>
+localhost:8000/api/books/borrow/<pk>
 ```
 Check your borrowing history: ``` GET ```
 ```
-127.0.0.1:8000/api/books/history/
+localhost:8000/api/books/history/
 ```
 **********************************************
 # Available commands for Admin Users:
 
 Show all the Users: ``` GET ```
 ```
-127.0.0.1:8000/api/users/
+localhost:8000/api/users/
 ```
 Send a request to a specific User: ``` GET ``` ``` PUT ``` ``` DELETE ```
 ```
-127.0.0.1:8000/api/users/<pk>
+localhost:8000/api/users/<pk>
 ```
 Send a request to a specific Book: ``` GET ``` ``` PUT ``` ``` DELETE ```
 ```
-127.0.0.1:8000/api/books/<pk>
+localhost:8000/api/books/<pk>
 ```
 Add a new book: ``` POST ```
 ```
-127.0.0.1:8000/api/books/add/
+localhost:8000/api/books/add/
 ```
 ```
 {
